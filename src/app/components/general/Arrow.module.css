@@ -1,0 +1,5 @@
+.Arrow {
+    transform: rotate(180deg);
+    height: 2em;
+    width: auto;
+}

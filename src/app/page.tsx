@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { SliceZone } from '@prismicio/react';
 import * as prismic from '@prismicio/client';
-
+import ScrollIndicator from './components/general/ScrollIndicator';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
 
@@ -39,6 +39,7 @@ export default async function Index() {
 
   return (
     <main className={styles.Main}>
+      <ScrollIndicator />
       <div className={styles.Container}>
         <div className={styles.Sticky}>
           <Scene />

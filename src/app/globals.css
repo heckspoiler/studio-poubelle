@@ -2,7 +2,7 @@
 
 :root {
     --main-font: "fractul-variable", sans-serif;
-    --main-red: "#e54c58"
+    --main-red: #e54c58;
 }
 
 * {
