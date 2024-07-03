@@ -1,0 +1,23 @@
+[
+  {
+    "uid": {
+      "__TYPE__": "UIDContent",
+      "value": "congress"
+    },
+    "title": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "heading1",
+          "content": {
+            "text": "Medicine"
+          }
+        }
+      ]
+    },
+    "slices": {
+      "__TYPE__": "SliceContentType",
+      "value": []
+    }
+  }
+]

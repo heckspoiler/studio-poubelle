@@ -1,0 +1,27 @@
+@import url("https://use.typekit.net/iud7cnd.css");
+
+:root {
+    --main-font: "fractul-variable", sans-serif;
+    --main-red: "#e54c58"
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--main-font);
+    font-variation-settings: "wght" 400;
+    color: var(--main-red);
+}
+
+
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {}
+
+
+
+/* Mobile */
+@media (max-width: 768px) {}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 768px) and (max-width: 1120px) {}
