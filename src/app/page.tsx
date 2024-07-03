@@ -39,7 +39,11 @@ export default async function Index() {
 
   return (
     <main className={styles.Main}>
-      <Scene />
+      <div className={styles.Container}>
+        <div className={styles.Sticky}>
+          <Scene />
+        </div>
+      </div>
       {/* <SliceZone slices={home.data.slices} components={components} /> */}
     </main>
   );

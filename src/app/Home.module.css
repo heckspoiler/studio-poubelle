@@ -4,6 +4,16 @@
     position: relative;
 }
 
+.Container {
+    height: 300vh;
+}
+
+.Sticky {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
 
 
 
