@@ -10,12 +10,12 @@ export const vertex = `
         
         vec2 mousePos = uMouse;
         vDistanceToMouse = distance(mousePos, vUv);
-        float mouseInfluence = smoothstep(0.5, 0.0, vDistanceToMouse);
+        float mouseInfluence = smoothstep(0.4, 0.0, vDistanceToMouse);
         
         float wave = sin(vUv.x * 20.0 + uTime) * cos(vUv.y * 20.0 - uTime) * 0.05;
         newPosition.z += wave * mouseInfluence;
         
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.3);
     }
 `;
 
@@ -28,7 +28,7 @@ export const fragment = `
 
     void main() {
         vec2 distortedUV = vUv;
-        float mouseInfluence = smoothstep(0.5, 0.0, vDistanceToMouse);
+        float mouseInfluence = smoothstep(0.4, 0.0, vDistanceToMouse);
         
         distortedUV += sin(vUv * 20.0 + uTime) * 0.05 * mouseInfluence;
         

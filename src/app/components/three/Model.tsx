@@ -18,10 +18,10 @@ export default function Model() {
     Object3DEventMap
   > | null>(null);
   const materialRef = useRef<Material | Material[]>();
-  const { amplitude, waveLength } = useControls({
-    amplitude: { value: 0, min: 0, max: 5, step: 0.05 },
-    waveLength: { value: 0, min: 0, max: 20, step: 1 },
-  });
+  // const { amplitude, waveLength } = useControls({
+  //   amplitude: { value: 0, min: 0, max: 5, step: 0.05 },
+  //   waveLength: { value: 0, min: 0, max: 20, step: 1 },
+  // });
 
   const texture = useTexture('/images/icon.png');
   const { width, height } = texture.image;
@@ -43,8 +43,8 @@ export default function Model() {
   const uniforms = useRef({
     uTexture: { value: texture },
     uTime: { value: 0 },
-    uAmplitude: { value: amplitude },
-    uWaveLength: { value: waveLength },
+    uAmplitude: { value: 0 },
+    uWaveLength: { value: 0 },
     uMouse: { value: [0, 0] },
   });
 
@@ -54,7 +54,7 @@ export default function Model() {
       plane.current.material &&
       'uniforms' in plane.current.material
     ) {
-      (plane.current.material as any).uniforms.uWaveLength.value = waveLength;
+      (plane.current.material as any).uniforms.uWaveLength.value = 0;
     }
 
     if (
@@ -62,16 +62,8 @@ export default function Model() {
       plane.current.material &&
       'uniforms' in plane.current.material
     ) {
-      (plane.current.material as any).uniforms.uAmplitude.value = amplitude;
+      (plane.current.material as any).uniforms.uAmplitude.value = 0;
     }
-
-    // if (
-    //   plane.current &&
-    //   plane.current.material &&
-    //   'uniforms' in plane.current.material
-    // ) {
-    //   (plane.current.material as any).uniforms.uTime.value += 0.02;
-    // }
 
     if (
       plane.current &&

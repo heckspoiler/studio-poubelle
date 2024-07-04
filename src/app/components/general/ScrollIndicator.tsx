@@ -1,18 +1,21 @@
 'use client';
 
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import styles from './ScrollIndicator.module.css';
 import Arrow from './Arrow';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Flip } from 'gsap/Flip';
 import { SplitText } from 'gsap/SplitText';
+import { DrawSVGPlugin } from 'gsap/all';
 
-gsap.registerPlugin(useGSAP, Flip, SplitText);
+gsap.registerPlugin(useGSAP, Flip, SplitText, DrawSVGPlugin);
 
 export default function ScrollIndicator() {
   const containerRef = useRef(null);
   const textRef = useRef(null);
+  const arrowRef = useRef(null);
+  const [isFinished, setIsFinished] = useState(false);
 
   useGSAP(
     () => {
@@ -22,12 +25,15 @@ export default function ScrollIndicator() {
         opacity: 0,
         y: 50,
         stagger: 0.05,
-        duration: 0.5,
+        duration: 0.8,
         ease: 'power2.out',
-        delay: 2,
+        delay: 1,
+        onComplete: () => setIsFinished(true),
       });
 
-      return () => split.revert();
+      return () => {
+        split.revert();
+      };
     },
     { scope: containerRef }
   );
@@ -36,7 +42,9 @@ export default function ScrollIndicator() {
     <div className={styles.Container} ref={containerRef}>
       <div className={styles.InnerContainer}>
         <h2 ref={textRef}>scroll</h2>
-        <Arrow />
+        <div ref={arrowRef}>
+          <Arrow isFinished={isFinished} />
+        </div>
       </div>
     </div>
   );
