@@ -6,49 +6,72 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(DrawSVGPlugin);
 
-export default function Arrow({ isFinished }: { isFinished: boolean }) {
-  const arrowOutlineRef = useRef(null);
-  const arrowFillRef = useRef(null);
-
-  useGSAP(
-    () => {
-      // Set initial states
-      gsap.set(arrowOutlineRef.current, { drawSVG: 0 });
-      gsap.set(arrowFillRef.current, { scale: 0, transformOrigin: 'center' });
-
-      // Animate based on isFinished
-      if (isFinished) {
-        const tl = gsap.timeline();
-        tl.to(arrowOutlineRef.current, { drawSVG: '100%', duration: 0.8 }).to(
-          arrowFillRef.current,
-          { scale: 0, duration: 0.5 },
-          '-=0.1'
-        );
-      }
-    },
-    { scope: arrowOutlineRef, dependencies: [isFinished] }
-  );
-
-  const arrowPath =
-    'M283.35 5.85C5.35001 284.75 5.85 284.85 5.85 284.85C-1.95 292.65 -1.95 305.35 5.85 313.05L20.05 327.25C27.85 335.05 40.55 335.05 48.35 327.25L251.35 124.35C257.65 118.05 268.45 122.55 268.45 131.45V581.35C268.45 592.35 277.45 601.35 288.45 601.35H308.45C319.45 601.35 328.45 592.35 328.45 581.35V131.25C328.45 122.35 339.25 117.85 345.55 124.15L548.65 327.25C556.45 335.05 569.15 335.05 576.95 327.25L591.05 313.15C598.85 305.35 598.85 292.65 591.05 284.85L311.75 5.85C303.85 -1.95 291.15 -1.95 283.35 5.85Z';
-
+export default function Arrow() {
   return (
     <svg
-      width="50%"
-      height="50%"
-      viewBox="0 0 597 602"
+      width="491"
+      height="385"
+      viewBox="0 0 491 385"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={styles.Arrow}
     >
-      <path
-        ref={arrowOutlineRef}
-        d={arrowPath}
-        stroke="#E54C58"
-        strokeWidth="20"
-        fill="none"
-      />
-      <path ref={arrowFillRef} d={arrowPath} fill="#E54C58" />
+      <g filter="url(#filter0_d_1_65)">
+        <mask id="path-1-inside-1_1_65" fill="white">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M0 74.1385L184.779 3L209.57 67.3927L301.959 31.8234L348.307 152.21L410.833 128.138L481.972 312.917L297.193 384.055L250.845 263.669L188.319 287.741L163.528 223.348L71.1385 258.918L0 74.1385Z"
+          />
+        </mask>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M0 74.1385L184.779 3L209.57 67.3927L301.959 31.8234L348.307 152.21L410.833 128.138L481.972 312.917L297.193 384.055L250.845 263.669L188.319 287.741L163.528 223.348L71.1385 258.918L0 74.1385Z"
+          fill="white"
+        />
+        <path
+          d="M184.779 3L187.579 1.92214L186.501 -0.877539L183.701 0.200317L184.779 3ZM0 74.1385L-1.07786 71.3388L-3.87754 72.4167L-2.79968 75.2163L0 74.1385ZM209.57 67.3927L206.77 68.4705L207.848 71.2702L210.648 70.1923L209.57 67.3927ZM301.959 31.8234L304.759 30.7456L303.681 27.9459L300.881 29.0237L301.959 31.8234ZM348.307 152.21L345.507 153.288L346.585 156.087L349.385 155.009L348.307 152.21ZM410.833 128.138L413.633 127.06L412.555 124.26L409.755 125.338L410.833 128.138ZM481.972 312.917L483.05 315.716L485.849 314.639L484.771 311.839L481.972 312.917ZM297.193 384.055L294.393 385.133L295.471 387.933L298.271 386.855L297.193 384.055ZM250.845 263.669L253.645 262.591L252.567 259.791L249.767 260.869L250.845 263.669ZM188.319 287.741L185.519 288.819L186.597 291.619L189.397 290.541L188.319 287.741ZM163.528 223.348L166.328 222.27L165.25 219.471L162.45 220.549L163.528 223.348ZM71.1385 258.918L68.3388 259.995L69.4167 262.795L72.2163 261.717L71.1385 258.918ZM183.701 0.200317L-1.07786 71.3388L1.07786 76.9382L185.857 5.79968L183.701 0.200317ZM212.369 66.3148L187.579 1.92214L181.979 4.07786L206.77 68.4705L212.369 66.3148ZM300.881 29.0237L208.492 64.593L210.648 70.1923L303.037 34.6231L300.881 29.0237ZM351.107 151.132L304.759 30.7456L299.16 32.9013L345.507 153.288L351.107 151.132ZM349.385 155.009L411.911 130.937L409.755 125.338L347.229 149.41L349.385 155.009ZM408.034 129.216L479.172 313.995L484.771 311.839L413.633 127.06L408.034 129.216ZM480.894 310.117L296.115 381.256L298.271 386.855L483.05 315.716L480.894 310.117ZM299.992 382.977L253.645 262.591L248.045 264.747L294.393 385.133L299.992 382.977ZM189.397 290.541L251.923 266.469L249.767 260.869L187.241 284.941L189.397 290.541ZM160.728 224.426L185.519 288.819L191.118 286.663L166.328 222.27L160.728 224.426ZM72.2163 261.717L164.606 226.148L162.45 220.549L70.0606 256.118L72.2163 261.717ZM-2.79968 75.2163L68.3388 259.995L73.9382 257.84L2.79968 73.0606L-2.79968 75.2163Z"
+          fill="#E54C58"
+          mask="url(#path-1-inside-1_1_65)"
+        />
+      </g>
+      <defs>
+        <filter
+          id="filter0_d_1_65"
+          x="0"
+          y="0"
+          width="490.972"
+          height="384.055"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset dx="9" dy="-3" />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0.898039 0 0 0 0 0.298039 0 0 0 0 0.345098 0 0 0 0.8 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_1_65"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_1_65"
+            result="shape"
+          />
+        </filter>
+      </defs>
     </svg>
   );
 }

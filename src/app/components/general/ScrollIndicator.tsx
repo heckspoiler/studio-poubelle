@@ -31,19 +31,20 @@ export default function ScrollIndicator() {
         onComplete: () => setIsFinished(true),
       });
 
-      // Set up hover animation
       const hoverAnimation = gsap.to(split.chars, {
-        y: 15,
-        rotateY: 180,
-        duration: 0.3,
+        y: (index, target) => (index % 2 === 0 ? 10 : 12),
+        rotateZ: (index, target) => (index % 2 === 0 ? 10 : -10),
+        duration: (index, target) => (index % 3 === 0 ? 0.3 : 0.4),
         paused: true,
-        stagger: 0.05,
+        stagger: 0.03,
       });
 
       // Attach event listeners
       const element = textRef.current as HTMLElement;
       element.addEventListener('mouseenter', () => hoverAnimation.play());
-      element.addEventListener('mouseleave', () => hoverAnimation.reverse());
+      element.addEventListener('mouseleave', () => {
+        hoverAnimation.reverse();
+      });
 
       return () => {
         split.revert();
@@ -61,7 +62,6 @@ export default function ScrollIndicator() {
       <div className={styles.InnerContainer} ref={textRef}>
         <h2>scroll</h2>
         <h2>down</h2>
-        {/* <Arrow isFinished={isFinished} /> */}
       </div>
     </div>
   );

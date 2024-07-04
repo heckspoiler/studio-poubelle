@@ -7,6 +7,7 @@ import { createClient } from '@/prismicio';
 import { components } from '@/slices';
 
 import styles from './Home.module.css';
+import Arrow from './components/general/Arrow';
 
 // This component renders your homepage.
 //
@@ -43,6 +44,7 @@ export default async function Index() {
       <div className={styles.Container}>
         <div className={styles.Sticky}>
           <Scene />
+          <Arrow />
         </div>
       </div>
       {/* <SliceZone slices={home.data.slices} components={components} /> */}
