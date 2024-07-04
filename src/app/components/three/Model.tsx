@@ -18,10 +18,6 @@ export default function Model() {
     Object3DEventMap
   > | null>(null);
   const materialRef = useRef<Material | Material[]>();
-  // const { amplitude, waveLength } = useControls({
-  //   amplitude: { value: 0, min: 0, max: 5, step: 0.05 },
-  //   waveLength: { value: 0, min: 0, max: 20, step: 1 },
-  // });
 
   const texture = useTexture('/images/icon.png');
   const { width, height } = texture.image;
@@ -46,7 +42,24 @@ export default function Model() {
     uAmplitude: { value: 0 },
     uWaveLength: { value: 0 },
     uMouse: { value: [0, 0] },
+    uScrollOffset: { value: 0 },
   });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const scrollFraction = scrollY / maxScroll;
+      if (materialRef.current && 'uniforms' in materialRef.current) {
+        (materialRef.current as any).uniforms.uScrollOffset.value =
+          scrollFraction;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useFrame(() => {
     if (

@@ -1,0 +1,8 @@
+.Container {
+    height: 2em;
+    width: 2em;
+    border: 2px dashed var(--main-red);
+    border-radius: 50%;
+    padding: 0.2em;
+    position: fixed
+}

@@ -1,8 +1,8 @@
 .Arrow {
-    position: absolute;
-    height: 25em;
+    position: sticky;
+    height: 20em;
     width: auto;
     z-index: -10;
     top: 25em;
-    left: 40em;
+    left: 20em;
 }

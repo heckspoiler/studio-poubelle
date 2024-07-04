@@ -5,6 +5,7 @@ import * as prismic from '@prismicio/client';
 import ScrollIndicator from './components/general/ScrollIndicator';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
+import Cursor from './components/general/Cursor';
 
 import styles from './Home.module.css';
 import Arrow from './components/general/Arrow';
@@ -40,11 +41,13 @@ export default async function Index() {
 
   return (
     <main className={styles.Main}>
+      <Cursor />
       <ScrollIndicator />
       <div className={styles.Container}>
         <div className={styles.Sticky}>
           <Scene />
-          <Arrow />
+
+          {/* <Arrow /> */}
         </div>
       </div>
       {/* <SliceZone slices={home.data.slices} components={components} /> */}
