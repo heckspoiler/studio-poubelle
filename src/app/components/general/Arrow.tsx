@@ -21,7 +21,7 @@ export default function Arrow({ isFinished }: { isFinished: boolean }) {
         const tl = gsap.timeline();
         tl.to(arrowOutlineRef.current, { drawSVG: '100%', duration: 0.8 }).to(
           arrowFillRef.current,
-          { scale: 1, duration: 0.5 },
+          { scale: 0, duration: 0.5 },
           '-=0.1'
         );
       }

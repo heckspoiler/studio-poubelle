@@ -20,11 +20,11 @@ export default function ScrollIndicator() {
   useGSAP(
     () => {
       const split = new SplitText(textRef.current, { type: 'chars' });
-
       gsap.from(split.chars, {
         opacity: 0,
+        rotateX: 135,
         y: 50,
-        stagger: 0.05,
+        stagger: 0.1,
         duration: 0.8,
         ease: 'power2.out',
         delay: 1,
