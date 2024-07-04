@@ -8,8 +8,7 @@ import { indicatorHoverState } from '@/app/stores/indicatorHoverStore';
 
 export default function Cursor() {
   const cursorRef = useRef(null);
-  const isTouchDevice =
-    typeof window !== 'undefined' && 'ontouchstart' in window;
+  const isTouchDevice = 'ontouchstart' in window;
   const isHovered = indicatorHoverState((state: any) => state.isHovered);
 
   useEffect(() => {
@@ -26,24 +25,15 @@ export default function Cursor() {
         x: x - 15,
         y: y - 15,
         transform: `rotate(${isHovered ? -145 : 0}deg) scale(${isHovered ? 1.2 : 1})`,
-        duration: 0.5,
+        duration: 0.3,
         ease: 'power4',
       });
     };
 
-    const handleMouseLeave = () => {
-      gsap.to(cursor, {
-        duration: 0.7,
-        opacity: 0,
-      });
-    };
-
     window.addEventListener('mousemove', updateCursorPosition);
-    document.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       window.removeEventListener('mousemove', updateCursorPosition);
-      document.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [isHovered, isTouchDevice]);
 

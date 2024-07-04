@@ -43,9 +43,9 @@ export default function ScrollIndicator() {
       const hoverAnimation = gsap.to(split.chars, {
         y: (index, target) => (index % 2 === 0 ? 10 : 12),
         rotateZ: (index, target) => (index % 2 === 0 ? 10 : -10),
-        duration: (index, target) => (index % 3 === 0 ? 0.3 : 0.4),
+        duration: (index, target) => (index % 2 === 0 ? 0.3 : 0.4),
         paused: true,
-        stagger: 0.03,
+        stagger: 0.02,
       });
 
       // Attach event listeners
