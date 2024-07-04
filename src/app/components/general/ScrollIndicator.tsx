@@ -1,25 +1,25 @@
 'use client';
-
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './ScrollIndicator.module.css';
 import Arrow from './Arrow';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { Flip } from 'gsap/Flip';
 import { SplitText } from 'gsap/SplitText';
 import { DrawSVGPlugin } from 'gsap/all';
 
-gsap.registerPlugin(useGSAP, Flip, SplitText, DrawSVGPlugin);
+gsap.registerPlugin(useGSAP, SplitText, DrawSVGPlugin);
 
 export default function ScrollIndicator() {
   const containerRef = useRef(null);
   const textRef = useRef(null);
-  const arrowRef = useRef(null);
   const [isFinished, setIsFinished] = useState(false);
 
   useGSAP(
     () => {
+      if (!textRef.current) return;
+
       const split = new SplitText(textRef.current, { type: 'chars' });
+
       gsap.from(split.chars, {
         opacity: 0,
         rotateX: 135,
@@ -31,20 +31,37 @@ export default function ScrollIndicator() {
         onComplete: () => setIsFinished(true),
       });
 
+      // Set up hover animation
+      const hoverAnimation = gsap.to(split.chars, {
+        y: 15,
+        rotateY: 180,
+        duration: 0.3,
+        paused: true,
+        stagger: 0.05,
+      });
+
+      // Attach event listeners
+      const element = textRef.current as HTMLElement;
+      element.addEventListener('mouseenter', () => hoverAnimation.play());
+      element.addEventListener('mouseleave', () => hoverAnimation.reverse());
+
       return () => {
         split.revert();
+        element.removeEventListener('mouseenter', () => hoverAnimation.play());
+        element.removeEventListener('mouseleave', () =>
+          hoverAnimation.reverse()
+        );
       };
     },
-    { scope: containerRef }
+    { scope: textRef }
   );
 
   return (
-    <div className={styles.Container} ref={containerRef}>
-      <div className={styles.InnerContainer}>
-        <h2 ref={textRef}>scroll</h2>
-        <div ref={arrowRef}>
-          <Arrow isFinished={isFinished} />
-        </div>
+    <div className={styles.Container}>
+      <div className={styles.InnerContainer} ref={textRef}>
+        <h2>scroll</h2>
+        <h2>down</h2>
+        {/* <Arrow isFinished={isFinished} /> */}
       </div>
     </div>
   );
