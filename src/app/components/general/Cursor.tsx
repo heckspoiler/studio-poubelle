@@ -4,10 +4,14 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import styles from './Cursor.module.css';
 import CursorArrow from './CursorArrow';
+import { indicatorHoverState } from '@/app/stores/indicatorHoverStore';
 
 export default function Cursor() {
   const cursorRef = useRef(null);
-  const isTouchDevice = 'ontouchstart' in window;
+  const isTouchDevice =
+    typeof window !== 'undefined' && 'ontouchstart' in window;
+  const isHovered = indicatorHoverState((state: any) => state.isHovered);
+
   useEffect(() => {
     const cursor = cursorRef.current;
 
@@ -15,28 +19,35 @@ export default function Cursor() {
       return;
     }
 
-    window.addEventListener('mousemove', (e) => {
+    const updateCursorPosition = (e: any) => {
       const { clientX: x, clientY: y } = e;
-      const target = e.target as HTMLElement;
-      const isTargetLinkOrBtn =
-        target?.closest('a') || target?.closest('button');
+
       gsap.to(cursor, {
         x: x - 15,
         y: y - 15,
-        duration: 0.2,
+        transform: `rotate(${isHovered ? -145 : 0}deg) scale(${isHovered ? 1.2 : 1})`,
+        duration: 0.5,
         ease: 'power4',
-        opacity: isTargetLinkOrBtn ? 0.6 : 1,
-        transform: `scale(${isTargetLinkOrBtn ? 3.5 : 1})`,
       });
-    });
+    };
 
-    document.addEventListener('mouseleave', () => {
+    const handleMouseLeave = () => {
       gsap.to(cursor, {
         duration: 0.7,
         opacity: 0,
       });
-    });
-  }, []);
+    };
+
+    window.addEventListener('mousemove', updateCursorPosition);
+    document.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      window.removeEventListener('mousemove', updateCursorPosition);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [isHovered, isTouchDevice]);
+
+  if (isTouchDevice) return null;
 
   return (
     <div className={styles.Container} ref={cursorRef}>

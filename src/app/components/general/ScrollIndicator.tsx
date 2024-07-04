@@ -1,11 +1,11 @@
 'use client';
 import React, { useRef, useState } from 'react';
 import styles from './ScrollIndicator.module.css';
-import Arrow from './Arrow';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/SplitText';
 import { DrawSVGPlugin } from 'gsap/all';
+import { indicatorHoverState } from '@/app/stores/indicatorHoverStore';
 
 gsap.registerPlugin(useGSAP, SplitText, DrawSVGPlugin);
 
@@ -13,6 +13,15 @@ export default function ScrollIndicator() {
   const containerRef = useRef(null);
   const textRef = useRef(null);
   const [isFinished, setIsFinished] = useState(false);
+  const isHovered = indicatorHoverState(
+    (state: any) => state.isHovered
+  ).isHovered;
+  const setIsHovered = indicatorHoverState().setIsHovered;
+
+  const handleContainerHover = (isHovered: boolean) => {
+    setIsHovered(isHovered);
+    console.log(isHovered);
+  };
 
   useGSAP(
     () => {
@@ -58,7 +67,11 @@ export default function ScrollIndicator() {
   );
 
   return (
-    <div className={styles.Container}>
+    <div
+      className={styles.Container}
+      onMouseEnter={() => handleContainerHover(true)}
+      onMouseLeave={() => handleContainerHover(false)}
+    >
       <div className={styles.InnerContainer} ref={textRef}>
         <h2>scroll</h2>
         <h2>down</h2>
