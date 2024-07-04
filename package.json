@@ -14,12 +14,14 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@gsap/react": "^2.1.1",
     "@prismicio/client": "^7.6.0",
     "@prismicio/next": "^1.6.0",
     "@prismicio/react": "^2.8.0",
     "@react-three/drei": "^9.108.1",
     "@react-three/fiber": "^8.16.8",
-    "gsap": "^3.12.5",
+    "dotenv": "^16.4.5",
+    "gsap": "npm:@gsap/shockingly@^3.12.5",
     "leva": "^0.9.35",
     "next": "^14.2.4",
     "react": "^18.3.1",
