@@ -1,0 +1,75 @@
+.Main {
+    height: 100vh;
+    width: 100%;
+    z-index: 10;
+}
+
+.Container {
+    height: fit-content;
+    justify-content: space-around;
+    line-height: 1.5;
+    padding: 0 4rem;
+    display: flex;
+}
+
+.TitleContainer {
+    font-size: 10rem;
+    line-height: 1;
+    width: fit-content;
+    width: 3em;
+    z-index: 12;
+    overflow: hidden;
+    transform: translateX(-5rem)
+}
+
+.Title {
+    font-size: 10rem;
+    line-height: 1;
+    color: var(--main-red);
+    text-align: center;
+    padding-top: 1rem;
+}
+
+.TextContainer {
+    font-size: 1.3rem;
+    font-variation-settings: "wght" 200;
+    line-height: 1.8;
+    width: 18rem;
+    height: fit-content;
+    align-self: flex-end;
+    text-align: left;
+    overflow: hidden;
+}
+
+
+
+.TextContainer h2 {
+    font-size: 1.3rem;
+    font-variation-settings: "wght" 200;
+    line-height: 1.8;
+
+}
+
+.Container h2 i {
+    font-size: 1.8rem;
+    line-height: 2;
+    line-height: 1;
+    width: 10em;
+    font-variation-settings: "wght" 400;
+    text-align: center;
+    color: white;
+    padding: 0.2em 0;
+    background-color: var(--main-red);
+}
+
+
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {}
+
+
+
+/* Mobile */
+@media (max-width: 768px) {}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 768px) and (max-width: 1120px) {}

@@ -6,9 +6,9 @@ import ScrollIndicator from './components/general/ScrollIndicator';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
 import Cursor from './components/general/Cursor';
-
 import styles from './Home.module.css';
 import Arrow from './components/general/Arrow';
+import { FirstSection } from './components/general/firstSection/FirstSection';
 
 // This component renders your homepage.
 //
@@ -46,9 +46,8 @@ export default async function Index() {
       <div className={styles.Container}>
         <div className={styles.Sticky}>
           <Scene />
-
-          {/* <Arrow /> */}
         </div>
+        <FirstSection />
       </div>
       {/* <SliceZone slices={home.data.slices} components={components} /> */}
     </main>

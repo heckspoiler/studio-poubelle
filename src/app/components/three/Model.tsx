@@ -8,10 +8,16 @@ import {
   Mesh,
   NormalBufferAttributes,
   Object3DEventMap,
+  Clock,
 } from 'three';
 import { useAspect, useTexture } from '@react-three/drei';
+import { isMobileStore } from '@/app/stores/isMobileStore';
+import { createNoise2D } from 'simplex-noise';
 
 export default function Model() {
+  const simplex = createNoise2D();
+  const isMobile = isMobileStore().isMobile;
+
   const plane = useRef<Mesh<
     BufferGeometry<NormalBufferAttributes>,
     Material | Material[],
@@ -22,7 +28,7 @@ export default function Model() {
   const texture = useTexture('/images/icon.png');
   const { width, height } = texture.image;
   const { viewport } = useThree();
-  const scale = useAspect(width, height, 0.25);
+  const scale = useAspect(width, height, !isMobile ? 0.25 : 0.6);
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   useEffect(() => {
@@ -61,13 +67,31 @@ export default function Model() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useFrame(() => {
+  useFrame((state) => {
+    const material = plane.current?.material as any;
+    const t = state.clock.elapsedTime;
     if (
       plane.current &&
       plane.current.material &&
       'uniforms' in plane.current.material
     ) {
       (plane.current.material as any).uniforms.uWaveLength.value = 0;
+    }
+
+    if (isMobile) {
+      const value = 5;
+      const noise =
+        Math.sin(t * 0.1) * 0.5 +
+        Math.sin(t * 0.5) * 0.3 +
+        Math.sin(t * 1.0) * 0.2;
+      material.uniforms.uTime.value = noise;
+    } else {
+      const value = 1;
+      const noise =
+        Math.sin((t * value) / 4) * value +
+        Math.sin((t * value) / 4) * value +
+        Math.sin((t * value) / 4) * value;
+      material.uniforms.uTime.value = noise;
     }
 
     if (

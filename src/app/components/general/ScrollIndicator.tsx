@@ -13,13 +13,11 @@ gsap.registerPlugin(useGSAP, SplitText, DrawSVGPlugin, ScrollTrigger);
 export default function ScrollIndicator() {
   const containerRef = useRef(null);
   const textRef = useRef(null);
-  const [isFinished, setIsFinished] = useState(false);
   const isHovered = indicatorHoverState((state: any) => state.isHovered);
   const setIsHovered = indicatorHoverState((state: any) => state.setIsHovered);
 
   const handleContainerHover = (isHovered: boolean) => {
     setIsHovered(isHovered);
-    console.log(isHovered);
   };
 
   useGSAP(
@@ -28,10 +26,7 @@ export default function ScrollIndicator() {
 
       const split = new SplitText(textRef.current, { type: 'chars' });
 
-      // Initial animation
-      const tl = gsap.timeline({
-        onComplete: () => setIsFinished(true),
-      });
+      const tl = gsap.timeline();
 
       tl.from(split.chars, {
         opacity: 0,
@@ -51,14 +46,13 @@ export default function ScrollIndicator() {
         paused: true,
         stagger: 0.02,
       });
-
       // ScrollTrigger animation
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: textRef.current,
           start: 'top 83%',
           end: 'bottom 40%',
-          markers: true,
+          // markers: true,
           toggleActions: 'play none none reverse',
           onEnter: () => {
             hoverAnimation.pause();

@@ -13,7 +13,7 @@ export const vertex = `
         vDistanceToMouse = distance(mousePos, vUv);
         float mouseInfluence = smoothstep(0.4, 0.0, vDistanceToMouse);
         
-        float wave = sin(vUv.x * 20.0 + uTime) * cos(vUv.y * 20.0 - uTime) * 0.05;
+        float wave = uTime * sin(vUv.x * 20.0 + uTime) * cos(vUv.y * 20.0 - uTime) * 0.05;
         newPosition.z += wave * mouseInfluence;
 
         newPosition.xy += (newPosition.xy - 0.5) * uScrollOffset;
