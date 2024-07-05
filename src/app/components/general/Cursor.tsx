@@ -25,7 +25,7 @@ export default function Cursor() {
         x: x - 15,
         y: y - 15,
         transform: `rotate(${isHovered ? -145 : 0}deg) scale(${isHovered ? 1.2 : 1})`,
-        duration: 0.3,
+        duration: 0.5,
         ease: 'power4',
       });
     };
