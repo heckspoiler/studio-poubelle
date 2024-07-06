@@ -1,55 +1,89 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/SplitText';
-import { DrawSVGPlugin } from 'gsap/all';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(useGSAP, SplitText, DrawSVGPlugin, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 export const TextComponent = ({ styles }: { styles: any }) => {
   const textRef = useRef(null);
+  const boxRef = useRef(null);
 
   useGSAP(
     () => {
-      if (!textRef.current) return;
+      if (!textRef.current || !boxRef.current) {
+        console.log('Refs not ready');
+        return;
+      }
+
+      console.log('Setting up animations');
 
       const split = new SplitText(textRef.current, { type: 'chars' });
-
-      const tl = gsap.timeline();
+      const box = boxRef.current;
 
       const scrollTl = gsap.timeline({
         scrollTrigger: {
-          trigger: textRef.current,
-          start: 'top 65%',
+          trigger: boxRef.current,
+          start: 'top 80%',
           end: 'bottom 20%',
           toggleActions: 'play none none reverse',
+          // markers: true,
+          onEnter: () => console.log('ScrollTrigger entered'),
+          onLeave: () => console.log('ScrollTrigger left'),
+          onEnterBack: () => console.log('ScrollTrigger entered back'),
+          onLeaveBack: () => console.log('ScrollTrigger left back'),
         },
       });
 
-      scrollTl.from(split.chars, {
-        opacity: 0,
-        rotateY: 120,
-        y: (index) => (index % 4 === 0 ? 30 : -30),
-        stagger: 0.05,
-        delay: (index) => (index < 17 ? 0 : 0.2),
-        duration: 0.2,
-        ease: 'power2.out',
-      });
+      scrollTl
+        .from(box, {
+          opacity: 0,
+          y: 80,
+          duration: 0.4,
+          ease: 'power2.out',
+        })
+        .from(split.chars, {
+          opacity: 0,
+          rotateY: 120,
+          x: (index) => (index % 4 === 0 ? 30 : -30),
+          stagger: 0.01,
+          duration: 0.2,
+          ease: 'power2.out',
+        })
+        .to(
+          box,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.2,
+            ease: 'power2.out',
+          },
+          '-=0.2'
+        )
+        .to(split.chars, {
+          opacity: 1,
+          rotateY: 0,
+        });
+
+      return () => {
+        split.revert();
+        ScrollTrigger.getAll().forEach((st) => st.kill());
+      };
     },
-    { scope: textRef }
+    { scope: boxRef }
   );
+
   return (
-    <div className={styles.TextContainer}>
+    <div className={styles.TextContainer} ref={boxRef}>
       <h2 ref={textRef}>
-        is a <br />
-        <i>Web Development</i>
-        <br /> and <br />
-        <i>Web Design</i> <br />
-        Studio in Zurich, Switzerland
+        does <br />
+        <div className={styles.InnerTextContainer}>
+          <strong>SAUCY WEB WORKS</strong>
+        </div>
+        in Zurich
       </h2>
     </div>
   );

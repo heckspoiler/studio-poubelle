@@ -5,7 +5,7 @@
 }
 
 .Container {
-    height: 300vh;
+    height: fit-content;
 }
 
 .Sticky {
