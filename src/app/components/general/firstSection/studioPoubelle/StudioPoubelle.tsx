@@ -24,9 +24,10 @@ export default function StudioPoubelle({ styles }: { styles: any }) {
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: textRef.current,
-          start: 'top 85%',
-          end: 'bottom 50%',
+          start: 'top 90%',
+          end: 'bottom 80%',
           toggleActions: 'play none none reverse',
+          scrub: 0.8,
           // markers: true,
         },
       });
@@ -37,26 +38,27 @@ export default function StudioPoubelle({ styles }: { styles: any }) {
           start: 'top 20%',
           end: 'bottom 30%',
           toggleActions: 'play none none reverse',
+          scrub: 0.8,
           // markers: true,
         },
       });
 
       scrollTl.from(split.chars, {
         rotateZ: 120,
-        opacity: 0,
         y: (index) => (index < 7 ? -550 : 550),
         x: (index) => (index < 7 ? -550 : 550),
         stagger: 0.05,
         duration: 0.6,
         ease: 'circ.out',
       });
-      scrollTl2.to(split.chars, {
-        visibility: 'hidden',
-        y: -200,
-        stagger: 0.05,
-        duration: 0.6,
-        ease: 'circ.out',
-      });
+      scrollTl2
+        .to(split.chars, {
+          y: -500,
+          stagger: 0.05,
+          duration: 0.6,
+          ease: 'linear',
+        })
+        .set(split.chars, { visibility: 'hidden' }, '>');
     },
     { scope: textRef }
   );

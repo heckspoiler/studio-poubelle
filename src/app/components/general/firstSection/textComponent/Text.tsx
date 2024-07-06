@@ -28,9 +28,25 @@ export const TextComponent = ({ styles }: { styles: any }) => {
         scrollTrigger: {
           trigger: boxRef.current,
           start: 'top 80%',
-          end: 'bottom 20%',
+          end: 'bottom 60%',
           toggleActions: 'play none none reverse',
+          scrub: 0.4,
           // markers: true,
+          onEnter: () => console.log('ScrollTrigger entered'),
+          onLeave: () => console.log('ScrollTrigger left'),
+          onEnterBack: () => console.log('ScrollTrigger entered back'),
+          onLeaveBack: () => console.log('ScrollTrigger left back'),
+        },
+      });
+
+      const scrollTl2 = gsap.timeline({
+        scrollTrigger: {
+          trigger: boxRef.current,
+          start: 'top 30%',
+          end: 'bottom 10%',
+          toggleActions: 'play none none reverse',
+          scrub: 0.4,
+          markers: true,
           onEnter: () => console.log('ScrollTrigger entered'),
           onLeave: () => console.log('ScrollTrigger left'),
           onEnterBack: () => console.log('ScrollTrigger entered back'),
@@ -49,7 +65,7 @@ export const TextComponent = ({ styles }: { styles: any }) => {
           opacity: 0,
           rotateY: 120,
           x: (index) => (index % 4 === 0 ? 30 : -30),
-          stagger: 0.01,
+          stagger: 0.05,
           duration: 0.2,
           ease: 'power2.out',
         })
@@ -67,6 +83,13 @@ export const TextComponent = ({ styles }: { styles: any }) => {
           opacity: 1,
           rotateY: 0,
         });
+
+      scrollTl2.to(box, {
+        x: 600,
+        stagger: 0.05,
+        duration: 0.8,
+        ease: 'power2.out',
+      });
 
       return () => {
         split.revert();

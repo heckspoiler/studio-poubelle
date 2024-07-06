@@ -7,10 +7,9 @@
     position: fixed;
     pointer-events: none;
     background-color: white;
-    /* mix-blend-mode: difference; */
+    mix-blend-mode: difference;
     z-index: 15;
     box-shadow: 1px 1px 5px var(--main-red);
-
 }
 
 
