@@ -5,7 +5,7 @@
 
 .Container {
     display: grid;
-    height: 100vh;
+    height: 80vh;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 20px;
@@ -15,7 +15,7 @@
 .Container>div {
     height: fit-content;
     overflow: hidden;
-    padding: 1em;
+    padding: 3em;
 }
 
 .Container>div h2 {
@@ -43,7 +43,18 @@
 }
 
 .TextContainer h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+
+.TextContainer h2 span {
+    background-color: var(--main-red);
+    padding: 0.2em;
+    color: white;
+}
+
+.TextContainer h2 i {
+    font-weight: 600;
 }
 
 

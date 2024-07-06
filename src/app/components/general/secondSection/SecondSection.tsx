@@ -13,12 +13,16 @@ export const SecondSection = () => {
   const firstTextRef = useRef(null);
   const secondTextRef = useRef(null);
   const thirdTextRef = useRef(null);
+  const blockRefOne = useRef(null);
+  const blockRefTwo = useRef(null);
+  const blockRefThree = useRef(null);
 
   useGSAP(
     () => {
       if (!containerRef.current) return;
 
       const textRefs = [firstTextRef, secondTextRef, thirdTextRef];
+      const blockRefs = [blockRefOne, blockRefTwo, blockRefThree];
 
       textRefs.forEach((textRef, index) => {
         if (!textRef.current) return;
@@ -30,14 +34,31 @@ export const SecondSection = () => {
         gsap.from(split.chars, {
           scrollTrigger: {
             trigger: textRef.current,
-            start: 'top 90%', // Animation starts when the top of the text enters the bottom of the viewport
-            end: 'bottom 60%', // Animation ends when the bottom of the text reaches 80% of the viewport height
-            scrub: 0.8, // Smooth scrubbing effect
+            start: 'top 100%',
+            end: 'bottom 80%',
+            scrub: 0.8,
             // markers: true,
           },
           opacity: 0,
           y: 100,
           stagger: 0.01,
+          ease: 'power2.out',
+        });
+      });
+      blockRefs.forEach((blockRef, index) => {
+        if (!blockRef.current) return;
+
+        gsap.to(blockRef.current, {
+          scrollTrigger: {
+            trigger: blockRef.current,
+            start: 'top 20%',
+            end: 'bottom top',
+            scrub: 1,
+            // markers: true,
+          },
+          x: index % 2 === 0 ? -1000 : 1000,
+
+          y: 100,
           ease: 'power2.out',
         });
       });
@@ -48,20 +69,23 @@ export const SecondSection = () => {
   return (
     <section className={styles.Main} ref={containerRef}>
       <div className={styles.Container}>
-        <div className={styles.TextContainer}>
+        <div className={styles.TextContainer} ref={blockRefOne}>
           <h2 ref={firstTextRef}>
-            We deliver Hi Quality Web Solutions for your Small business or
-            whatever you need from us
+            We deliver <i>Hi Quality Web Solutions</i> for your Small business
+            or whatever you need from us
           </h2>
         </div>
-        <div className={styles.TextContainer}>
+        <div className={styles.TextContainer} ref={blockRefTwo}>
           <h2 ref={secondTextRef}>
-            While making sure you're standing out from the crowd
+            While making sure you're <br />
+            <span>standing out</span>
+            <br /> from the crowd
           </h2>
         </div>
-        <div className={styles.TextContainer}>
+        <div className={styles.TextContainer} ref={blockRefThree}>
           <h2 ref={thirdTextRef}>
-            Individual solutions for individual preferences
+            <strong>Individual solutions </strong>for <br />
+            individual preferences
           </h2>
         </div>
       </div>

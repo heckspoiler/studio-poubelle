@@ -43,10 +43,10 @@ export const TextComponent = ({ styles }: { styles: any }) => {
         scrollTrigger: {
           trigger: boxRef.current,
           start: 'top 30%',
-          end: 'bottom 10%',
+          end: 'bottom 0%',
           toggleActions: 'play none none reverse',
           scrub: 0.4,
-          markers: true,
+          // markers: true,
           onEnter: () => console.log('ScrollTrigger entered'),
           onLeave: () => console.log('ScrollTrigger left'),
           onEnterBack: () => console.log('ScrollTrigger entered back'),

@@ -1,6 +1,6 @@
 .Main {
     height: fit-content;
-    padding: 2em 0;
+    padding: 2rem 0 16rem 0;
     width: 100%;
     z-index: 10;
 }
