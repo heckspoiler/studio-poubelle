@@ -1,16 +1,15 @@
 .Container {
     position: absolute;
     width: fit-content;
-    margin: auto;
     padding-bottom: 1em;
-    bottom: 4em;
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     left: 50%;
-    transform: translateX(-50%)
+    transform: translateX(-50%);
+    top: 85vh;
 }
 
 .InnerContainer {

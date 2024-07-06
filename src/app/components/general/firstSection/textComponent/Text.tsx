@@ -79,11 +79,10 @@ export const TextComponent = ({ styles }: { styles: any }) => {
   return (
     <div className={styles.TextContainer} ref={boxRef}>
       <h2 ref={textRef}>
-        does <br />
         <div className={styles.InnerTextContainer}>
           <strong>SAUCY WEB WORKS</strong>
         </div>
-        in Zurich
+        from Zurich
       </h2>
     </div>
   );

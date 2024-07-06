@@ -22,7 +22,11 @@ export default function ScrollIndicator() {
 
   useGSAP(
     () => {
-      if (!textRef.current) return;
+      if (!textRef.current) {
+        return;
+      }
+
+      console.log(textRef.current);
 
       const split = new SplitText(textRef.current, { type: 'chars' });
 
@@ -52,7 +56,6 @@ export default function ScrollIndicator() {
           trigger: textRef.current,
           start: 'top 83%',
           end: 'bottom 40%',
-          // markers: true,
           toggleActions: 'play none none reverse',
           onEnter: () => {
             hoverAnimation.pause();

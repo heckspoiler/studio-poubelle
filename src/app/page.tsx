@@ -2,13 +2,19 @@ import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { SliceZone } from '@prismicio/react';
 import * as prismic from '@prismicio/client';
-import ScrollIndicator from './components/general/ScrollIndicator';
+// import ScrollIndicator from './components/general/ScrollIndicator';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
 import Cursor from './components/general/Cursor';
 import styles from './Home.module.css';
-import Arrow from './components/general/Arrow';
+import ScrollSmoother from 'gsap/dist/ScrollSmoother';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import HomeSections from './components/home/HomeSections';
 import { FirstSection } from './components/general/firstSection/FirstSection';
+import ScrollIndicator from './components/general/ScrollIndicator';
+gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
 
 // This component renders your homepage.
 //
@@ -41,14 +47,13 @@ export default async function Index() {
 
   return (
     <main className={styles.Main}>
-      <Cursor />
       <ScrollIndicator />
-      <div className={styles.Container}>
-        <div className={styles.Sticky}>
-          <Scene />
-        </div>
-        <FirstSection />
+      <Cursor />
+      <div className={styles.Sticky}>
+        <Scene />
       </div>
+      {/* <FirstSection /> */}
+      <HomeSections />
       {/* <SliceZone slices={home.data.slices} components={components} /> */}
     </main>
   );
