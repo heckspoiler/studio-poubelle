@@ -16,6 +16,10 @@
     height: fit-content;
     overflow: hidden;
     padding: 3em;
+    border: 1px dotted var(--main-red);
+    background-color: white;
+    box-shadow: 10px 10px 1px var(--main-red);
+
 }
 
 .Container>div h2 {
@@ -39,7 +43,8 @@
 }
 
 .TextContainer {
-    width: 35rem;
+    width: fit-content;
+    max-width: 30rem;
 }
 
 .TextContainer h2 {
